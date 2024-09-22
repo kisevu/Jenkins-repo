@@ -2,15 +2,25 @@ pipeline {
     agent any  
 
     stages {
-        stage('Check Java Version') {
+//         stage('Check Java Version') {
+//             steps {
+//                 bat "java -version"
+//                 bat "javac -version"
+//             }
+//         }
+//         stage('Echo Message') {
+//             steps {
+//                 echo "Kevin Ameda is the guy"
+//             }
+//         }
+        stage('Maven Clean Install') {
             steps {
-                bat "java -version"  
-                bat "javac -version" 
+                bat "mvn clean install"
             }
         }
-        stage('Echo Message') {
+        stage('Run Spring Boot Application') {
             steps {
-                echo "Kevin Ameda is the guy"
+                bat "mvn spring-boot:run"
             }
         }
     }
