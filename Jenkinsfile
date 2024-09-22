@@ -21,7 +21,7 @@ pipeline {
           stage('Maven Clean Install') {
                  when {
                    expression {
-                    BRANCH_NAME == 'dev' || BRANCH_NAME == 'main'
+                    env.BRANCH_NAME == 'dev' || env.BRANCH_NAME == 'main'
                    }
                  }
                     steps {
