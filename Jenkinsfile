@@ -13,15 +13,15 @@ pipeline {
 //                 echo "Kevin Ameda is the guy"
 //             }
 //         }
-        stage('Maven Clean Install') {
-            steps {
-                bat "mvn clean install"
-            }
-        }
-        stage('Run Spring Boot Application') {
-            steps {
-                bat "mvn spring-boot:run"
-            }
-        }
+//         stage('Run Spring Boot Application') {
+//             steps {
+//                 bat "mvn spring-boot:run"
+//             }
+//         }
+          stage('Maven Clean Install') {
+                    steps {
+                        bat "mvn clean install"
+                    }
+                }
     }
 }
