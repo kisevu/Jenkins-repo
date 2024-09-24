@@ -21,7 +21,7 @@ pipeline {
                         bat "mvn clean install"
                     }
                 }
-          stages('deploy') {
+          stage('deploy') {
            steps {
              echo 'deploying my application...'
              withCredentials([
