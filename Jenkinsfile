@@ -2,6 +2,7 @@ pipeline {
     agent any  //Where it will execute
     environment { //declare env custom variables
       NEW_VERSION = '1.0.0'
+      SERVER_CREDENTIALS = credentials('server-credentials')
        }
     stages {
         stage('Run Spring Boot Application') {
@@ -20,6 +21,17 @@ pipeline {
                         bat "mvn clean install"
                     }
                 }
+          stages('deploy') {
+           steps {
+             echo 'deploying my application...'
+             withCredentials([
+              usernamePassword(credentials: 'server-credentials', usernameVariable: USER,
+              passwordVariable: PWD)
+              ]) {
+               echo "some script maybe ${USER} ${PWD}"
+                }
+             }
+          }
     }
     post {
      always {
