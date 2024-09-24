@@ -1,23 +1,15 @@
 pipeline {
-    agent any  
-
+    agent any  //Where it will execute
+    environment { //declare env custom variables
+      NEW_VERSION = '1.0.0'
+       }
     stages {
-//         stage('Check Java Version') {
-//             steps {
-//                 bat "java -version"
-//                 bat "javac -version"
-//             }
-//         }
-//         stage('Echo Message') {
-//             steps {
-//                 echo "Kevin Ameda is the guy"
-//             }
-//         }
-//         stage('Run Spring Boot Application') {
-//             steps {
-//                 bat "mvn spring-boot:run"
-//             }
-//         }
+        stage('Run Spring Boot Application') {
+                steps {
+                    bat "mvn spring-boot:run"
+                    echo "running version ${NEW_VERSION} " //using the custom env
+                }
+        }
           stage('Maven Clean Install') {
                  when {
                    expression {
