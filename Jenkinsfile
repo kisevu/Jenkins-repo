@@ -4,9 +4,14 @@ pipeline {
       NEW_VERSION = '1.0.0'
       SERVER_CREDENTIALS = credentials('server-credentials')
        }
+    tools {
+      maven 'Maven'
+    }
     stages {
         stage('Run Spring Boot Application') {
                 steps {
+                    bat "mvn install"
+                    echo "Done with installations"
                     bat "mvn spring-boot:run"
                     echo "running version ${NEW_VERSION} " //using the custom env
                 }
@@ -21,17 +26,17 @@ pipeline {
                         bat "mvn clean install"
                     }
                 }
-          stage('deploy') {
-           steps {
-             echo 'deploying my application...'
-             withCredentials([
-              usernamePassword(credentials: 'server-credentials', usernameVariable: USER,
-              passwordVariable: PWD)
-              ]) {
-               echo "some script maybe ${USER} ${PWD}"
-                }
-             }
-          }
+//           stage('deploy') {
+//            steps {
+//              echo 'deploying my application...'
+//              withCredentials([
+//               usernamePassword(credentials: 'server-credentials', usernameVariable: USER,
+//               passwordVariable: PWD)
+//               ]) {
+//                echo "some script maybe ${USER} ${PWD}"
+//                 }
+//              }
+//           }
     }
     post {
      always {
