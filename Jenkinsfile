@@ -15,9 +15,9 @@ pipeline {
     stages {
         stage('Run Spring Boot Application') {
                 steps {
-                    bat "mvn install"
-                    echo "Done with installations"
-                    bat "mvn spring-boot:run"
+//                     bat "mvn install"
+//                     echo "Done with installations"
+//                     bat "mvn spring-boot:run"
                     echo "running version ${NEW_VERSION} " //using the custom env
                 }
         }
