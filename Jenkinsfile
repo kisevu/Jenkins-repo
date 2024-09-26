@@ -5,7 +5,7 @@ pipeline {
       SERVER_CREDENTIALS = credentials('server-credentials')
        }
     parameters {
-      choice( name: "${NEW_VERSION}", choices: ["${NEW_VERSION}"],description: 'my first version of deployment')
+      choice( name: 'VERSION', choices: ['1.0.0','1.2.0','1.3.0'],description: 'my first version of deployment')
       booleanParam(name: 'executeTests', defaultValue: true, description: 'deployed already')
       //parameters defined which can be used in any of our stages
     }
@@ -53,15 +53,15 @@ pipeline {
 //              }
 //           }
     }
-    post {
-     always {
-     echo 'From post and will execute regardless'
-     }
-     success {
-      echo 'Build went successfully!!!'
-     }
-     failure {
-      echo 'Build did fail!!!'
-     }
-    }
+//     post {
+//      always {
+//      echo 'From post and will execute regardless'
+//      }
+//      success {
+//       echo 'Build went successfully!!!'
+//      }
+//      failure {
+//       echo 'Build did fail!!!'
+//      }
+//     }
 }
