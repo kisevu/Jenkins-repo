@@ -4,6 +4,11 @@ pipeline {
       NEW_VERSION = '1.0.0'
       SERVER_CREDENTIALS = credentials('server-credentials')
        }
+    parameters {
+      choice( name: "${NEW_VERSION}", choices: ["${NEW_VERSION}"],description: 'my first version of deployment')
+      booleanParam(name: 'executeTests', defaultValue: true, description: 'deployed already')
+      //parameters defined which can be used in any of our stages
+    }
     tools {
       maven 'Maven'
     }
@@ -26,6 +31,16 @@ pipeline {
                         bat "mvn clean install"
                     }
                 }
+          stage("test") {
+             when {
+                expression {
+                    params.executeTests == true
+                   }
+                }
+             steps {
+                  echo "testing my spring boot application..."
+              }
+          }
 //           stage('deploy') {
 //            steps {
 //              echo 'deploying my application...'
